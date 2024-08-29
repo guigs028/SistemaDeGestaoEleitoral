@@ -26,6 +26,11 @@ public class CadastroPartido {
 	}
 
 	public Partido consultaPartido(int numero) {
+		for(Partido partido : partidos){
+			if(partido.getNumero() == numero){
+				return partido;
+			}
+		}
 		return null;
 	}
 

@@ -1,8 +1,19 @@
+import java.util.ArrayList;
+
 public class Candidatura {
-	private Candidato[] candidato;
+	private ArrayList<Candidato> candidatos;
 
 	public boolean cadastraCandidato(Candidato c) {
-		return false;
+		if(c != null){
+			for (Candidato candidato : candidatos) {
+				if (candidato.getMunicipio().equals(c.getMunicipio()) && candidato.getNumero() == c.getNumero()) {
+					return false;
+					
+					}
+				}
+				candidatos.add(c);
+				return true;
+			}
+			return false;	
 	}
-
 }
