@@ -3,6 +3,10 @@ import java.util.ArrayList;
 public class Candidatura {
 	private ArrayList<Candidato> candidatos;
 
+	public Candidatura() {
+		this.candidatos = new ArrayList<>();
+	}
+
 	public boolean cadastraCandidato(Candidato c) {
 		if(c != null){
 			for (Candidato candidato : candidatos) {
@@ -16,4 +20,5 @@ public class Candidatura {
 			}
 			return false;	
 	}
+
 }

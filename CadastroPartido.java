@@ -2,6 +2,10 @@ import java.util.ArrayList;
 public class CadastroPartido {
 	private ArrayList<Partido> partidos;
 
+	public CadastroPartido() {
+		this.partidos = new ArrayList<>();
+	}
+
 	public boolean cadastraPartido(Partido p) {
 		if(p != null){
 			for (Partido partido : partidos) {

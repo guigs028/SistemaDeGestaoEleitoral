@@ -45,7 +45,7 @@ public class Candidato {
 		this.partido = partido;
 	}
 
-	public Candidato() {
+	public Candidato(int numero, String nome, String municipio, Partido partido) {
 		this.numero = numero;
 		this.nome = nome;
 		this.municipio = municipio;
