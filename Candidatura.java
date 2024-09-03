@@ -21,4 +21,28 @@ public class Candidatura {
 			return false;	
 	}
 
+	public boolean verificaCandidato (int c, String cidade) {
+		for (Candidato candidato : candidatos) {
+			if (candidato.getNumero() == c && candidato.getMunicipio().equals(cidade)){
+				return true;
+			}
+		} return false;
+	}
+
+	public boolean adicionarVotos (int numCandidato, String cidade, int votos){
+		for (Candidato candidato : candidatos) {
+			if (candidato.getNumero() == numCandidato && candidato.getMunicipio().equals(cidade)) {
+				candidato.setVotos(candidato.getVotos() + votos);
+				return true;
+			}
+		}return false;
+	} 
+
+	public int mostrarVotos (int numCandidato, String cidade){
+		for (Candidato candidato : candidatos) {
+			if (candidato.getNumero() == numCandidato && candidato.getMunicipio().equals(cidade)) {
+				 return candidato.getVotos();
+			}
+		} return -1;
+	}
 }

@@ -34,8 +34,10 @@ public class ACMEVoting {
 			System.out.println("Digite o número do partido:");
 			int num = tec.nextInt();
 			tec.nextLine();
-			if (num == -1) break;
-			
+				if (num == -1) {
+				break;
+				}
+
 			System.out.println("Digite o nome do partido:");
 			String nome = tec.nextLine();
 			
@@ -74,15 +76,25 @@ public class ACMEVoting {
 	public void cadastrarVotos(){
 		Scanner tec = new Scanner(System.in);
 		while (true) {
-			System.out.println("Digite o número do candidato:");
-			int num = tec.nextInt();
-			if (num == -1) break;
+			System.out.println("Digite o numero do candidato:");
+			int numCandidato = tec.nextInt();
+			if (numCandidato == -1) break;
 			tec.nextLine();
 
-			System.out.println("Digite o nome do candidato:");
-			String nome = tec.nextLine();
+			System.out.println("Digite a cidade do candidato:");
+			String cidadeCandidato = tec.nextLine();
 			
+			System.out.println("Digite o número de votos do candidato:");
+			int numVotos = tec.nextInt();
+
 			//verificar se o candidato é válido
+			if(candidatura.verificaCandidato(numCandidato,cidadeCandidato) == true){
+				if (candidatura.adicionarVotos(numCandidato, cidadeCandidato, numVotos) == true && candidatura.mostrarVotos(numCandidato, cidadeCandidato) != -1) {
+					System.out.println("3:" + numCandidato + "," + cidadeCandidato + "," + candidatura.mostrarVotos(numCandidato, cidadeCandidato));
+				}
+			} else {
+				System.out.println("deu ruim");
+			}
 		}
 	}
 }
