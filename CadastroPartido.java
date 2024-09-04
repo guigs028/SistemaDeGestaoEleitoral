@@ -38,4 +38,13 @@ public class CadastroPartido {
 		return null;
 	}
 
+	public void printaPartido(int numPartido) {
+        Partido partido = consultaPartido(numPartido);
+        if (partido != null) {
+            System.out.println("4: " + numPartido + "," + partido.getNome());
+        } else {
+            System.out.println("4: Partido não encontrado.");
+        }
+    }
 }
+

@@ -17,9 +17,9 @@ public class ACMEVoting {
 		//3
 		cadastrarVotos();
 		//4
-		//mostrarDadosPartidoPeloNum();
+		mostrarDadosPartidosPeloNum();
 		//5
-		//mostrarDadosCandidato();
+		mostrarDadosCandidato();
 		//6
 		//mostrarVotosDosPrefeitosDeCertoPartido();
 		//7
@@ -45,7 +45,7 @@ public class ACMEVoting {
 			if(cadastroPartido.cadastraPartido(partido)){ //Verifica se o paratido já existe
 				System.out.println("1:"+ num + ","+ nome);
 			}else {
-				System.out.println("Partido com mesmo número já cadastrado");
+				System.out.println("1: Partido com mesmo número já cadastrado");
 			}
 		}
 	}
@@ -68,7 +68,7 @@ public class ACMEVoting {
 			if(candidatura.cadastraCandidato(candidato) == true){ //Verifica se o já existe no município
 				System.out.println("2:" + num + "," + nome +"," + municipio);
 			}else {
-				System.out.println("Candidato já cadastrado no município");
+				System.out.println("2: Candidato já cadastrado no município");
 			}	
 		}
 	}
@@ -93,8 +93,35 @@ public class ACMEVoting {
 					System.out.println("3:" + numCandidato + "," + cidadeCandidato + "," + candidatura.mostrarVotos(numCandidato, cidadeCandidato));
 				}
 			} else {
-				System.out.println("deu ruim");
+				System.out.println("3: Votos não puderam ser cadastrados");
 			}
+		}
+	}
+
+	public void mostrarDadosPartidosPeloNum () {
+		Scanner tec = new Scanner(System.in);
+		while (true) {
+			System.out.println("Digite o número do partido:");
+			int numPartido = tec.nextInt();
+			if (numPartido == -1) break;
+			tec.nextLine();
+
+			cadastroPartido.printaPartido(numPartido);
+		}
+	}
+
+	public void mostrarDadosCandidato () {
+		Scanner tec = new Scanner(System.in);
+		while (true) {
+			System.out.println("Digite o numero do candidato: ");
+			int numCandidato = tec.nextInt();
+			if (numCandidato == -1) break;
+			tec.nextLine();
+
+			System.out.println("Digite o município do candidato: ");
+			String municipioCandidato = tec.nextLine();
+				
+			candidatura.printaCandidato(numCandidato, municipioCandidato);
 		}
 	}
 }

@@ -45,4 +45,13 @@ public class Candidatura {
 			}
 		} return -1;
 	}
+
+	public void printaCandidato(int numCandidato, String municipioCandidato) {
+        for (Candidato candidato : candidatos) {
+            if (candidato.getNumero() == numCandidato && candidato.getMunicipio().equals(municipioCandidato)) {
+                System.out.println("5: " + candidato.getNumero() + ", " + candidato.getNome() + ", " + candidato.getMunicipio() + ", " + candidato.getVotos());
+                return; 
+            }
+        } System.out.println("5: Nenhum candidato encontrado.");
+    }
 }
