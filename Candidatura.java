@@ -54,4 +54,24 @@ public class Candidatura {
             }
         } System.out.println("5: Nenhum candidato encontrado.");
     }
+
+	public void printaPrefeitos(Partido partido) {
+		boolean temPrefeito = false;
+		int numPartido = partido.getNumero();
+		String nomePartido = partido.getNome();
+	
+		for (Candidato candidato : candidatos) {
+			int numeroCandidato = candidato.getNumero();
+			if (numeroCandidato >= 10 && numeroCandidato < 100) { // Verifica se é um prefeito
+				if (numeroCandidato == numPartido) { // Verifica se o número do prefeito é igual ao número do partido
+					System.out.println("6: " + nomePartido + "," + candidato.getNumero() + "," + candidato.getNome() + "," + candidato.getMunicipio() + "," + candidato.getVotos());
+					temPrefeito = true;
+				}
+			}
+		}
+		if (!temPrefeito) {
+			System.out.println("Nenhum prefeito encontrado para o partido " + nomePartido);
+		}
+	}
+	
 }
