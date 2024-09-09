@@ -43,7 +43,7 @@ public class CadastroPartido {
         if (partido != null) {
             System.out.println("4: " + numPartido + "," + partido.getNome());
         } else {
-            System.out.println("4: Partido não encontrado.");
+            System.out.println("4:Nenhum partido encontrado.");
         }
     }
 }

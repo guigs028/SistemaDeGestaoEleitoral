@@ -52,7 +52,7 @@ public class Candidatura {
                 System.out.println("5: " + candidato.getNumero() + ", " + candidato.getNome() + ", " + candidato.getMunicipio() + ", " + candidato.getVotos());
                 return; 
             }
-        } System.out.println("5: Nenhum candidato encontrado.");
+        } System.out.println("5:Nenhum candidato encontrado.");
     }
 
 	public void printaPrefeitos(Partido partido) {
@@ -70,7 +70,7 @@ public class Candidatura {
 			}
 		}
 		if (!temPrefeito) {
-			System.out.println("Nenhum prefeito encontrado para o partido " + nomePartido);
+			System.out.println("6:Nenhum prefeito encontrado para o partido " + nomePartido);
 		}
 	}
 	
