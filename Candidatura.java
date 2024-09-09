@@ -7,6 +7,10 @@ public class Candidatura {
 		this.candidatos = new ArrayList<>();
 	}
 
+	public ArrayList<Candidato> getCandidatos() {
+        return this.candidatos;
+    }
+
 	public boolean cadastraCandidato(Candidato c) {
 		if(c != null){
 			for (Candidato candidato : candidatos) {
@@ -62,8 +66,8 @@ public class Candidatura {
 	
 		for (Candidato candidato : candidatos) {
 			int numeroCandidato = candidato.getNumero();
-			if (numeroCandidato >= 10 && numeroCandidato < 100) { // Verifica se é um prefeito
-				if (numeroCandidato == numPartido) { // Verifica se o número do prefeito é igual ao número do partido
+			if (numeroCandidato >= 10 && numeroCandidato < 100) {
+				if (numeroCandidato == numPartido) { 
 					System.out.println("6: " + nomePartido + "," + candidato.getNumero() + "," + candidato.getNome() + "," + candidato.getMunicipio() + "," + candidato.getVotos());
 					temPrefeito = true;
 				}

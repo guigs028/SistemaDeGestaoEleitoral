@@ -16,8 +16,7 @@ public class CadastroPartido {
 			partidos.add(p);
 			return true;
 		}
-		return false;
-		
+		return false;	
 	}
 
 	public Partido consultaPartido(String nome) {
@@ -46,5 +45,10 @@ public class CadastroPartido {
             System.out.println("4:Nenhum partido encontrado.");
         }
     }
+
+	public ArrayList<Partido> getPartidos() {
+		return partidos;
+	}
 }
+
 

@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.PrintStream;
 import java.nio.charset.Charset;
 import java.util.Locale;
+import java.util.ArrayList;
 
 public class ACMEVoting {
     private Candidatura candidatura;
@@ -28,6 +29,8 @@ public class ACMEVoting {
         mostrarDadosPartidosPeloNum();
         mostrarDadosCandidato();
         mostrarVotosDosPrefeitosDeCertoPartido();
+        mostrarPartidoComMaisCandidatos();
+        mostrarPrefeitoEVereadorMaisVotados();
     }
 
     public void cadastrarPartidos() {
@@ -53,7 +56,7 @@ public class ACMEVoting {
             String nome = entrada.nextLine();
             String municipio = entrada.nextLine();
 
-            int partidoNumero = Integer.parseInt(Integer.toString(num).substring(0, 2)); // Extraindo os dois primeiros dígitos
+            int partidoNumero = Integer.parseInt(Integer.toString(num).substring(0, 2)); 
             Partido partido = cadastroPartido.consultaPartido(partidoNumero);
 
             if (partido != null) {
@@ -72,7 +75,7 @@ public class ACMEVoting {
             entrada.nextLine();
             String cidadeCandidato = entrada.nextLine();
             int numVotos = entrada.nextInt();
-            entrada.nextLine();  // Consome a nova linha deixada pelo nextInt()
+            entrada.nextLine();  
 
             if (candidatura.verificaCandidato(numCandidato, cidadeCandidato)) {
                 if (candidatura.adicionarVotos(numCandidato, cidadeCandidato, numVotos)) {
@@ -106,6 +109,91 @@ public class ACMEVoting {
         }
     }
 
+    public void mostrarPartidoComMaisCandidatos() {
+        ArrayList<PartidoCandidatos> listaPartidos = new ArrayList<>();
+    
+        for (Candidato candidato : candidatura.getCandidatos()) {
+            int numeroPartido = Integer.parseInt(Integer.toString(candidato.getNumero()).substring(0, 2));
+            PartidoCandidatos partidoCandidatos = null;
+    
+            for (PartidoCandidatos pc : listaPartidos) {
+                if (pc.getNumeroPartido() == numeroPartido) {
+                    partidoCandidatos = pc;
+                    break;
+                }
+            }
+    
+            if (partidoCandidatos == null) {
+                partidoCandidatos = new PartidoCandidatos(numeroPartido);
+                listaPartidos.add(partidoCandidatos);
+            }
+    
+            partidoCandidatos.incrementaCandidatos();
+        }
+    
+        Partido partidoComMaisCandidatos = null;
+        int maxCandidatos = 0;
+    
+        for (Partido partido : cadastroPartido.getPartidos()) {
+            int numeroPartido = partido.getNumero();
+            int quantidadeCandidatos = 0;
+    
+            for (PartidoCandidatos pc : listaPartidos) {
+                if (pc.getNumeroPartido() == numeroPartido) {
+                    quantidadeCandidatos = pc.getQuantidadeCandidatos();
+                    break;
+                }
+            }
+    
+            if (quantidadeCandidatos > maxCandidatos) {
+                maxCandidatos = quantidadeCandidatos;
+                partidoComMaisCandidatos = partido;
+            }
+        }
+    
+        if (partidoComMaisCandidatos != null) {
+            System.out.println("7:" + partidoComMaisCandidatos.getNumero() + "," + partidoComMaisCandidatos.getNome() + "," + maxCandidatos);
+        } else {
+            System.out.println("7:Nenhum partido com candidatos.");
+        }
+    }    
+
+    public void mostrarPrefeitoEVereadorMaisVotados() {
+        Candidato prefeitoMaisVotado = null;
+        Candidato vereadorMaisVotado = null;
+    
+        for (Candidato candidato : candidatura.getCandidatos()) {
+            int numeroCandidato = candidato.getNumero();
+            int votos = candidato.getVotos();
+    
+            if (numeroCandidato >= 10 && numeroCandidato <= 99) {
+                if (prefeitoMaisVotado == null || votos > prefeitoMaisVotado.getVotos()) {
+                    prefeitoMaisVotado = candidato;
+                }
+            } else if (numeroCandidato >= 10000 && numeroCandidato <= 99999) {
+                if (vereadorMaisVotado == null || votos > vereadorMaisVotado.getVotos()) {
+                    vereadorMaisVotado = candidato;
+                }
+            }
+        }
+    
+        boolean encontrouCandidato = false;
+    
+        if (prefeitoMaisVotado != null) {
+            System.out.println("8:" + prefeitoMaisVotado.getNumero() + "," + prefeitoMaisVotado.getNome() + "," + prefeitoMaisVotado.getMunicipio() + "," + prefeitoMaisVotado.getVotos());
+            encontrouCandidato = true;
+        }
+    
+        if (vereadorMaisVotado != null) {
+            System.out.println("8:" + vereadorMaisVotado.getNumero() + "," + vereadorMaisVotado.getNome() + "," + vereadorMaisVotado.getMunicipio() + "," + vereadorMaisVotado.getVotos());
+            encontrouCandidato = true;
+        }
+    
+        if (!encontrouCandidato) {
+            System.out.println("8:Nenhum candidato encontrado.");
+        }
+    }
+    
     private void redirecionaEntrada() {
         try {
             BufferedReader streamEntrada = new BufferedReader(new FileReader(nomeArquivoEntrada));

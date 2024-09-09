@@ -17,7 +17,6 @@ public class Partido {
 		}
 	}
 
-	// Métodos getters e setters
     public int getNumero() {
         return numero;
     }
